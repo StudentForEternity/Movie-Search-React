@@ -1,19 +1,16 @@
-body {
-  margin: 0;
-  padding: 0;
+html {
   font-size: 10px;
-  background-color: rgb(244, 244, 244);
-  color: #333;
 }
 
 * {
   box-sizing: border-box;
 }
 
-img {
-  display: block;
-  width: 100%;
-  margin: auto;
+body {
+  margin: 0;
+  padding: 0;
+  background-color: rgb(244, 244, 244);
+  color: #333;
 }
 
 p {
@@ -68,14 +65,35 @@ small {
 .button:hover {
   background-color: rgba(0, 0, 0, 0.85);
 }
+.card-list {
+  margin-top: 4em;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-gap: 1.5em;
+}
+.card {
+  padding: 2em 4em;
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
+  margin-bottom: 2em;
+  background-color: white;
+}
 
+.card--title {
+  margin-bottom: 0.5em;
+  font-size: 3.2rem;
+}
+
+.card--image {
+  margin: 0 auto;
+  display: block;
+}
 @media (min-width: 786px) {
   .form {
     grid-template-columns: auto 1fr auto;
     grid-gap: 1em;
     align-items: center;
   }
-
   .input {
     margin-bottom: 0;
   }

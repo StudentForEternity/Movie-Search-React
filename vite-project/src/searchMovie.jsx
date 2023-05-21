@@ -1,30 +1,30 @@
-import React from "react";
-
+import React from "react"
+import MovieCard from "./MovieCard"
 export default function SearchMovie() {
-  const [query, setQuery] = React.useState("");
-  const [movie, setMovie] = React.useState();
+  const [query, setQuery] = React.useState("")
+  const [movie, setMovie] = React.useState([])
 
-  const url = `https://api.themoviedb.org/3/search/movie?api_key=00080e671eebb6cb0e837ddce2c629ff&language=en-US&query=${query}&page=1&include_adult=false`;
+  const url = `https://api.themoviedb.org/3/search/movie?api_key=00080e671eebb6cb0e837ddce2c629ff&language=en-US&query=${query}&page=1&include_adult=false`
 
   async function searchMovies(e) {
-    e.preventDefault();
-    console.log("submitting");
+    e.preventDefault()
 
     try {
-      const res = await fetch(url);
-      const data = await res.json();
-      setMovie(data);
+      const res = await fetch(url)
+      const data = await res.json()
+      setMovie(data.results)
     } catch (err) {
-      console.error(err);
+      console.error(err)
     }
   }
 
   function handleSubmit(e) {
-    console.log(`typing`);
-    setQuery(e.target.value);
+    console.log(`typing`)
+    setQuery(e.target.value)
   }
+
   return (
-    <div>
+    <section>
       <form className="form" onSubmit={searchMovies}>
         <label className="label" htmlFor="query">
           Movie Name:
@@ -41,11 +41,13 @@ export default function SearchMovie() {
           search
         </button>
       </form>
-      <div>
-        <h2>{movie.results[0].original_title}</h2>
-        <img src={``} />
-        <p>{movie.results[0].overview}</p>
+      <div className="card-list">
+        {movie
+          .filter((movie) => movie.poster_path)
+          .map((movie) => {
+            return <MovieCard movie={movie} key={movie.id} />
+          })}
       </div>
-    </div>
-  );
+    </section>
+  )
 }
